@@ -3,80 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Report | Ahmed Safwan Sajid</title>
+    <title>Research Archive | Ahmed Safwan Sajid</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0a0c; --surface: #121216; --text: #f8f9fa; 
-            --text-secondary: #a0a0b0; --accent: #6366f1; --border: rgba(255,255,255,0.08);
-        }
-        [data-theme="light"] {
-            --bg: #ffffff; --surface: #f8f9fa; --text: #0a0a0c; 
-            --text-secondary: #555566; --accent: #4f46e5; --border: rgba(0,0,0,0.08);
-        }
+        :root { --bg: #0a0a0c; --surface: #121216; --text: #f8f9fa; --text-sec: #a0a0b0; --accent: #6366f1; --border: rgba(255,255,255,0.08); }
+        [data-theme="light"] { --bg: #ffffff; --surface: #f8f9fa; --text: #0a0a0c; --text-sec: #555566; --accent: #4f46e5; --border: rgba(0,0,0,0.08); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
         
-        header { padding: 2rem; text-align: center; border-bottom: 1px solid var(--border); background: var(--surface); }
-        header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-        header p { color: var(--text-secondary); font-size: 0.95rem; }
-        header .author { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; margin-top: 0.5rem; }
+        header { padding: 4rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header p { color: var(--text-sec); max-width: 600px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; }
+        .back-link:hover { text-decoration: underline; }
 
-        main { flex: 1; padding: 2rem; display: flex; flex-direction: column; align-items: center; }
+        main { flex: 1; padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
         
-        .controls { width: 100%; max-width: 1000px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .btn { padding: 0.6rem 1.2rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 500; transition: 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;}
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-        .theme-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem; }
-
-        .pdf-container { width: 100%; max-width: 1000px; flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        iframe { width: 100%; height: 85vh; border: none; background: #fff; }
-
-        footer { padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid var(--border); }
-        footer a { color: var(--accent); text-decoration: none; }
-
-        @media (max-width: 768px) {
-            iframe { height: 60vh; }
-            .controls { flex-direction: column; gap: 1rem; }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .report-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+            padding: 2rem; transition: 0.3s; display: flex; flex-direction: column;
         }
+        .report-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        
+        .report-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 0.5rem; }
+        .report-card h3 { font-size: 1.25rem; margin-bottom: 1rem; line-height: 1.3; }
+        .report-card p { color: var(--text-sec); font-size: 0.95rem; margin-bottom: 1.5rem; flex: 1; }
+        
+        .report-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .tag { background: var(--bg); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: var(--text-sec); border: 1px solid var(--border); }
+        
+        .btn { display: inline-block; padding: 0.6rem 1.2rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 500; text-align: center; transition: 0.2s; }
+        .btn:hover { opacity: 0.9; }
+
+        footer { padding: 2rem; text-align: center; color: var(--text-sec); font-size: 0.8rem; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- EDIT: Update your report title and details here -->
-        <h1>Bangladesh Commodity Trading Strategy Report</h1>
-        <p>This report explores the dynamics of commodity trading in Bangladesh, focusing on key markets, price trends, and strategic opportunities.</p>
-        <div class="author">Ahmed Safwan Sajid | <div June,="" 2026=""></div></div>
+        <a href="https://github.com/SafwanTech-projects/Research-Reports" class="back-link">&larr; Back to Portfolio</a>
+        <h1>Research Archive</h1>
+        <p>A collection of Research reports, strategic analysis, and data science projects.</p>
     </header>
 
     <main>
-        <div class="controls">
-            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">🌓</button>
-            <!-- IMPORTANT: Change 'report.pdf' to your actual PDF filename -->
-            <a href="Bangladesh_Commodity_Trading_Strategy_Report.pdf" download class="btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                Download PDF
-            </a>
-        </div>
+        <div class="archive-grid">
+            
+            <!-- REPORT 1 -->
+            <div class="report-card">
+                <div class="report-meta">June 2026</div>
+                <h3>Bangladesh Commodity Trading Strategy Report</h3>
+                <p>Macro-economic analysis and commodity trading strategy report for Bangladesh, including market trends, price forecasts, and risk assessment.</p>
+                <div class="report-tags">
+                    <span class="tag">Macro Strategy</span>
+                    <span class="tag">Feasibility</span>
+                </div>
+                <!-- LINK TO VIEWER PAGE -->
+                <a href="report-1.html" class="btn">View Report</a>
+            </div>
 
-        <div class="pdf-container">
-            <!-- IMPORTANT: Change 'report.pdf' to your actual PDF filename -->
-            <iframe src="Bangladesh_IVF_Regulatory_Roadmap.pdf" title="Research Report PDF"></iframe>
+            <!-- REPORT 2 -->
+            <div class="report-card">
+                <div class="report-meta">July 2026</div>
+                <h3>Bangladesh IVF Regulatory Roadmap</h3>
+                <p>Comprehensive analysis of the regulatory landscape for in vitro fertilization (IVF) services in Bangladesh, including policy recommendations and compliance strategies.</p>
+                <div class="report-tags">
+                    <span class="tag">IVF</span>
+                    <span class="tag">Regulatory</span>
+                    <span class="tag">Policy</span>
+                </div>
+                <!-- LINK TO VIEWER PAGE -->
+                <a href="report-2.html" class="btn">View Report</a>
+            </div>
+
+            <!-- REPORT 3 -->
+            <div class="report-card">
+                <div class="report-meta">May 2026 • Data Science</div>
+                <h3>Automated Financial Data Pipeline</h3>
+                <p>Python-based automation scripts for extracting, cleaning, and visualizing quantitative financial data from SEC EDGAR and Bloomberg.</p>
+                <div class="report-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Automation</span>
+                    <span class="tag">SQL</span>
+                </div>
+                <!-- LINK TO VIEWER PAGE -->
+                <a href="report-3.html" class="btn">View Report</a>
+            </div>
+
+            <!-- ADD MORE CARDS HERE -->
+
         </div>
     </main>
 
     <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> Ahmed Safwan Sajid. <a href="https://yourusername.github.io/portfolio" target="_blank">Back to Portfolio</a></p>
+        <p>&copy; 2026 Ahmed Safwan Sajid. All rights reserved.</p>
     </footer>
 
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        const setTheme = (t) => { html.setAttribute('data-theme', t); localStorage.setItem('theme', t); };
-        setTheme(localStorage.getItem('theme') || 'dark');
-        toggle.addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-    </script>
 </body>
 </html>
